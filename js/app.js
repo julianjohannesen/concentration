@@ -50,68 +50,79 @@ function shuffle(array) {
 
 /* Flip the cards and see whether they match. If so add them to matched, etc. If not flip them back over. */
 function turn(e) {
-    if (openCards.length < 2) {
-        showIcon(e);
-        addToOpen(e);
-    } else { // the case where openCards = 2
-        if (matched(e)) {
-            addMatch(e);
-            addToMatched(e);
-        } else {
-            hideIcon();
+    if (openCards.length < 3) {
+        flipUp(e);
+        addToOpenCards(e);
+        if (openCards.length === 2) {
+            if (matched(e)) {
+                addMatch(e);
+                addToMatchedCards(e);
+            } else {
+                openCards[0].classList.add("no-match");
+                openCards[1].classList.add("no-match");
+                setTimeout(flipDown, 2000);
+            } 
         }
     }
 }
 
 /* Display the card icon */
-function showIcon(e) {
+function flipUp(e) {
     // Add the "show" class to the li, not the i
-    e.target.parentElement.classList.add('show');
+    e.target.classList.add('show', "open");
 }
 
 /* Add the card to the list of "open" cards */
-function addToOpen(e) {
-    openCards.push(e.target.parentElement);
+function addToOpenCards(e) {
+    openCards.push(e.target);
 }
 
 // If openCards contains two cards, then get the icon class of the first card and compare it to the icon class of the second card to see whether they match.
 // NOTE - they add the match class to the li element. Same for the 'open' and 'show' classes
 function matched() {
-    // The list of classes on the i tag for both cards
+    // The list of classes on the i tag for both cards (should be fa and fa-whatever)
     const cardOneClasses = openCards[0].firstElementChild.classList;
     const cardTwoClasses = openCards[1].firstElementChild.classList;
+    console.log(cardOneClasses + " " + cardTwoClasses);
     // Then loop to check each class in the first card's class list to determine whether there's a class that begins with fa- and if that same class is also contained in the second card's class list. Using the regular expression means that we don't have to depend on the position of the icon class in the list of classes.
     for (const theClass of cardOneClasses) {
-            if ( /fa-.+/.test(theClass) && cardTwoClasses.classList.contains(theClass) ) {
+            if ( /fa-.+/.test(theClass) && cardTwoClasses.contains(theClass) ) {
                 return true;
             }
     }
 }
 
-          {
-                    // Add the match class to the two matching cards, adding the class to the li, not to the i
-                    openCards[0].classList.add("match");
-                    openCards[1].classList.add("match");
-                    // Add the cards to the matchedCards array
-                    matchedCards.push(openCards[0], openCards[1]);
-                    // And remove them from the openCards array. There are only two, so we'll just pop them off one after the other.
-                    openCards.pop();
-                    openCards.pop();      
-            } else {
-                // If there's no match, flip the cards back over
-                openCards[0].classList.remove("show");
-                openCards[1].classList.remove("show");
-                // And remove them from the openCards array
-                openCards.pop();
-                openCards.pop();
-            }
-        }
-    }    
+function addMatch(e){
+    // Add the match class to the two matching cards, adding the class to the li, not to the i
+    openCards[0].classList.add("match");
+    openCards[1].classList.add("match");
 }
 
-//document.getElementById('score-panel').innerHTML = 'Congratulations! You finished!';
+function addToMatchedCards(e) {
+    // Add the cards to the matchedCards array
+    matchedCards.push(openCards[0], openCards[1]);
+    // And remove them from the openCards array. There are only two, so we'll just pop them off one after the other.
+    openCards.pop();
+    openCards.pop();
+}
+
+function flipDown(e) {
+    // If there's no match, flip the cards back over
+    openCards[0].classList.remove("show", "no-match", "open");
+    openCards[1].classList.remove("show", "no-match", "open");
+    // And remove them from the openCards array
+    openCards.pop();
+    openCards.pop();
+}
 
 // Shuffle the cards and display the board
 setup();
-/* If a card is clicked, "flip" it. */
+// If a card is clicked, "flip" it.
 deck.addEventListener("click", turn, false);
+
+// While there are still unmatched cards, keep taking turns!
+if (matchedCards.length === 16) {
+    deck.removeEventListener("click", turn, false);
+    document.getElementById('score-panel').innerHTML = 'Congratulations! You completed the game!';
+
+}
