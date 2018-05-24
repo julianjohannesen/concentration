@@ -50,18 +50,20 @@ function shuffle(array) {
 
 /* Flip the cards and see whether they match. If so add them to matched, etc. If not flip them back over. */
 function turn(e) {
-    if (openCards.length === 0 || openCards.length === 1) {
-        flipUp(e);
-        addToOpenCards(e);
-        if (openCards.length === 2) {
-            if (matched(e)) {
-                addMatch(e);
-                addToMatchedCards(e);
-            } else {
-                openCards[0].classList.add("no-match");
-                openCards[1].classList.add("no-match");
-                setTimeout(flipDown, 2000);
-            } 
+    if (e.target.nodeName.toLowerCase() == "li") {
+        if (openCards.length === 0 || openCards.length === 1) {
+            flipUp(e);
+            addToOpenCards(e);
+            if (openCards.length === 2) {
+                if (matched(e)) {
+                    addMatch(e);
+                    addToMatchedCards(e);
+                } else {
+                    openCards[0].classList.add("no-match");
+                    openCards[1].classList.add("no-match");
+                    setTimeout(flipDown, 2000);
+                } 
+            }
         }
     }
 }
