@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 // Get the deck element
 const deck = document.getElementById('deck');
 // Create the cards array
@@ -5,6 +7,7 @@ const deck = document.getElementById('deck');
 const cards = Array.from(deck.querySelectorAll('.card'));
 // The two most recently chosen cards
 const openCards = [];
+const matchedCards = [];
 
 // Shuffle and display the cards on the page
 function setup() {
@@ -45,49 +48,70 @@ function shuffle(array) {
     return array;
 }
 
-/* Flip the card */
-function flip(event) {
+/* Flip the cards and see whether they match. If so add them to matched, etc. If not flip them back over. */
+function turn(e) {
     if (openCards.length < 2) {
-        displayIcon(event);
-        addToOpen(event);
+        showIcon(e);
+        addToOpen(e);
+    } else { // the case where openCards = 2
+        if (matched(e)) {
+            addMatch(e);
+            addToMatched(e);
+        } else {
+            hideIcon();
+        }
     }
 }
 
 /* Display the card icon */
-function displayIcon(event) {
-    event.target.classList.add('show');
+function showIcon(e) {
+    // Add the "show" class to the li, not the i
+    e.target.parentElement.classList.add('show');
 }
 
 /* Add the card to the list of "open" cards */
-function addToOpen(event) {
-    openCards.push(event.target.parentElement);
+function addToOpen(e) {
+    openCards.push(e.target.parentElement);
 }
 
-// If the icon of card just added to the openCards list, matches the icon of a card already on the list, then add class 'match' etc.
+// If openCards contains two cards, then get the icon class of the first card and compare it to the icon class of the second card to see whether they match.
 // NOTE - they add the match class to the li element. Same for the 'open' and 'show' classes
-function match() {
+function matched() {
+    // The list of classes on the i tag for both cards
     const cardOneClasses = openCards[0].firstElementChild.classList;
     const cardTwoClasses = openCards[1].firstElementChild.classList;
-    let theIcon = "";
-    // Is there more than one card in openCards?
-    if (openCards.length > 1) {
-        // This loop determines whether there's a class in the most recently opened  card's class list that begins with fa-. It will store that class in the theIcon variable. This way we don't have to depend on the position of the icon class in the list of classes.
-        for (const theClass of classesArray) {
-            //Test the regular expression to see if it matches the current class in the loop
-            //If it does, then assign that class to theIcon.  This && expression is a shorthand way of wrting an if statement.
-            /fa-.+/.test(theClass) && (theIcon = theClass);
-        }
-        // Loop through the cards in openCards and if a card contains theIcon, then add the match class
-        for (const card of openCards) {
-            if (card.classList.contains(theIcon)) {
-                card.classList.toggle("match");
-                break;
+    // Then loop to check each class in the first card's class list to determine whether there's a class that begins with fa- and if that same class is also contained in the second card's class list. Using the regular expression means that we don't have to depend on the position of the icon class in the list of classes.
+    for (const theClass of cardOneClasses) {
+            if ( /fa-.+/.test(theClass) && cardTwoClasses.classList.contains(theClass) ) {
+                return true;
             }
-        }
     }
 }
+
+          {
+                    // Add the match class to the two matching cards, adding the class to the li, not to the i
+                    openCards[0].classList.add("match");
+                    openCards[1].classList.add("match");
+                    // Add the cards to the matchedCards array
+                    matchedCards.push(openCards[0], openCards[1]);
+                    // And remove them from the openCards array. There are only two, so we'll just pop them off one after the other.
+                    openCards.pop();
+                    openCards.pop();      
+            } else {
+                // If there's no match, flip the cards back over
+                openCards[0].classList.remove("show");
+                openCards[1].classList.remove("show");
+                // And remove them from the openCards array
+                openCards.pop();
+                openCards.pop();
+            }
+        }
+    }    
+}
+
+//document.getElementById('score-panel').innerHTML = 'Congratulations! You finished!';
 
 // Shuffle the cards and display the board
 setup();
 /* If a card is clicked, "flip" it. */
-deck.addEventListener("click", flip, false);
+deck.addEventListener("click", turn, false);

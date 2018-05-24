@@ -13,10 +13,7 @@ let theCounter = 0;
 function hideIcon(card) {
     card.firstElementChild.classList.remove('show');
 }
-/* Remove a card from openCards if it isn't a match. If the two flipped cards don't match, then we'll need to flip them back over. */
-function removeCard() {
-    openCards.pop();
-}
+
 
 
 
@@ -28,4 +25,3 @@ function increaseCounter() {
     document.getElementById('moves').textContent = theCounter;
 }
 
-//document.getElementById('score-panel').innerHTML = 'Congratulations! You finished!';
