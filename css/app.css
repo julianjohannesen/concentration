@@ -33,6 +33,10 @@ h1 {
     font-weight: 300;
 }
 
+.score-panel {
+    margin-top: 1em;
+}
+
 /*
  * Styles for the deck of cards
  */
@@ -64,10 +68,11 @@ h1 {
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
     transition: background-color .2s ease-in-out;
+    transition: transform .2s ease;
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    transform: rotate(25deg);
     background: #02b3e4;
     cursor: default;
 }
