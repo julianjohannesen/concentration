@@ -50,7 +50,7 @@ function shuffle(array) {
 
 /* Flip the cards and see whether they match. If so add them to matched, etc. If not flip them back over. */
 function turn(e) {
-    if (openCards.length < 3) {
+    if (openCards.length === 0 || openCards.length === 1) {
         flipUp(e);
         addToOpenCards(e);
         if (openCards.length === 2) {
@@ -83,7 +83,6 @@ function matched() {
     // The list of classes on the i tag for both cards (should be fa and fa-whatever)
     const cardOneClasses = openCards[0].firstElementChild.classList;
     const cardTwoClasses = openCards[1].firstElementChild.classList;
-    console.log(cardOneClasses + " " + cardTwoClasses);
     // Then loop to check each class in the first card's class list to determine whether there's a class that begins with fa- and if that same class is also contained in the second card's class list. Using the regular expression means that we don't have to depend on the position of the icon class in the list of classes.
     for (const theClass of cardOneClasses) {
             if ( /fa-.+/.test(theClass) && cardTwoClasses.contains(theClass) ) {
