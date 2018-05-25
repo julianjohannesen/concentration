@@ -7,11 +7,17 @@ const deck = document.getElementById('deck');
 const cards = Array.from(deck.querySelectorAll('.card'));
 // The two most recently chosen cards
 const openCards = [];
+// The matched cards
 const matchedCards = [];
+// The move counter
+let theCounter = 0;
 
 // Shuffle and display the cards on the page
-function setup() {
-
+function setup(e) {
+    // Prevent page reload, if the user clicks the "play again" button
+    e.preventDefault();
+    // Remove the show-modal class from the modal
+    document.getElementById("play-again-modal").classList.remove("show-modal");
     // Re-order the elements in the cards array
     shuffle(cards);
     // Create a fragment to store our appended list items, thus avoiding reflows
@@ -24,6 +30,10 @@ function setup() {
     deck.innerHTML = "";
     // appendChild inserts the fragment
     deck.appendChild(fragment);
+    // Clear the clock
+    clearClock();
+    // Start the clock
+    timeIt();
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -50,17 +60,29 @@ function shuffle(array) {
 
 /* Flip the cards and see whether they match. If so add them to matched, etc. If not flip them back over. */
 function turn(e) {
-    if (e.target.nodeName.toLowerCase() == "li") {
+    // Only a click on a list item is accepted, and only if that card hasn't already been clicked on. We don't want to allow clicks between cards or clicking on the same card more than once in a turn
+    if ( e.target.nodeName.toLowerCase() == "li" && !openCards.includes(e.target) && !matchedCards.includes(e.target) ) {
+        // If this is your first or second card, do the following. Clicking on a third card does nothing.
         if (openCards.length === 0 || openCards.length === 1) {
+            // Flip over the card
             flipUp(e);
+            // Add the new card to the openCards array
             addToOpenCards(e);
+            // Increase the move counter
+            increaseCounter();
+            // If this is you second card flip, do the following
             if (openCards.length === 2) {
-                if (matched(e)) {
-                    addMatch(e);
-                    addToMatchedCards(e);
+                // If the cards match
+                if (matched()) {
+                    // ...then add the match class
+                    addMatch();
+                    // ... and add these cards to the matched cards array
+                    addToMatchedCards();
                 } else {
+                    // If the card do NOT match, add the no-match class to both cards
                     openCards[0].classList.add("no-match");
                     openCards[1].classList.add("no-match");
+                    // Show the cards for a couple of seconds, before flipping them back over
                     setTimeout(flipDown, 2000);
                 } 
             }
@@ -79,6 +101,12 @@ function addToOpenCards(e) {
     openCards.push(e.target);
 }
 
+// Increase the move counter each time a card is flipped up
+function increaseCounter() {
+    theCounter++;
+    document.getElementById('moves').textContent = theCounter;
+}
+
 // If openCards contains two cards, then get the icon class of the first card and compare it to the icon class of the second card to see whether they match.
 // NOTE - they add the match class to the li element. Same for the 'open' and 'show' classes
 function matched() {
@@ -93,21 +121,23 @@ function matched() {
     }
 }
 
-function addMatch(e){
+function addMatch(){
     // Add the match class to the two matching cards, adding the class to the li, not to the i
     openCards[0].classList.add("match");
     openCards[1].classList.add("match");
 }
 
-function addToMatchedCards(e) {
+function addToMatchedCards() {
     // Add the cards to the matchedCards array
     matchedCards.push(openCards[0], openCards[1]);
     // And remove them from the openCards array. There are only two, so we'll just pop them off one after the other.
     openCards.pop();
     openCards.pop();
+    gameOver();
+    
 }
 
-function flipDown(e) {
+function flipDown() {
     // If there's no match, flip the cards back over
     openCards[0].classList.remove("show", "no-match", "open");
     openCards[1].classList.remove("show", "no-match", "open");
@@ -116,14 +146,22 @@ function flipDown(e) {
     openCards.pop();
 }
 
+function gameOver(){
+    // If the user has matched all of the cards, do the following
+    if (matchedCards.length === 16) {
+        // Stop the clock
+        stopClock()
+        // Show the play again modal
+        document.getElementById('play-again-modal').classList.add("show-modal") 
+    }
+}
+
 // Shuffle the cards and display the board
 setup();
+
 // If a card is clicked, "flip" it.
 deck.addEventListener("click", turn, false);
 
-// While there are still unmatched cards, keep taking turns!
-if (matchedCards.length === 16) {
-    deck.removeEventListener("click", turn, false);
-    document.getElementById('score-panel').innerHTML = 'Congratulations! You completed the game!';
-
-}
+// If the game is won or the player hits reset
+document.getElementById("reset").addEventListener("click", setup, false);
+document.getElementById("play-again").addEventListener("click", setup, false);

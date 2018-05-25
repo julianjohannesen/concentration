@@ -23,13 +23,23 @@ onclick add "show-icon" class to either li or i tag to unhide the icon
 
         <section class="score-panel">
         	<ul id="stars" class="stars">
-
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
         	</ul>
 
-        	<span id="moves" class="moves">0</span> Moves
+            <div class="moves">
+                    <span id="moves">0</span> Moves
+            </div>
 
-            <div class="restart">
-        		<i class="fa fa-repeat"></i>
+            <div class="timer">
+                Elapsed Time: <span id="timer">00:00:00</span>
+            </div>
+
+            <div id="reset" class="reset">
+        		<i class="fa fa-repeat"></i> Reset
         	</div>
         </section>
 

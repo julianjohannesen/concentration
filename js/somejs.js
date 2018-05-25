@@ -1,27 +1,40 @@
-const matchedCards = [];
-let numOfCards = 16;
-const openCards = [];
-let theCounter = 0;
 
-//while (matchedCards.length < numOfCards) {
-    // do the stuff
-//}
+const star = document.createElement("li");
+star.innerHTML = '<i class="fa fa-star"></i>';
+document.getElementById('stars').appendChild(star);
 
-// If two cards are open and are not matched, don't allow user to open more cards
+const clock = document.getElementsById("timer");
+let seconds = 0, minutes = 0, t;
 
-/* Hide the card icon. If the two flipped cards don't match, then we'll need to flip them back over with this function */
-function hideIcon(card) {
-    card.firstElementChild.classList.remove('show');
+function updateClock() {
+    // Increment seconds
+    seconds++;
+    // When you reach 1 minute, increment minutes and set seconds back to zero
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+    }
+    // Now set the clock display
+    clock.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+    // Finally, call timeIt again
 }
 
-
-
-
-function increaseCounter() {
-    const star = document.createElement("li");
-    star.innerHTML = '<i class="fa fa-star"></i>';
-    document.getElementById('stars').appendChild(star);
-    theCounter++;
-    document.getElementById('moves').textContent = theCounter;
+// Timer funtion
+function timeIt() {
+    t = setTimeout(updateClock, 1000);
 }
 
+timeIt();
+
+// Stop function
+// This will run when all matches are achieved
+function stopClock() {
+    clearTimeout(t);
+}
+
+// Clear function
+// This will run on click of "Play Again" or reset
+function clearClock() {
+    clock.textContent = "00:00";
+    seconds = 0; minutes = 0;
+}

@@ -26,15 +26,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: 3em;
 }
 
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
-}
-
-.score-panel {
-    margin-top: 1em;
 }
 
 /*
@@ -98,8 +95,14 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
-    margin-bottom: 10px;
+    width: 100%;
+    margin-top: 1em;
+    margin-bottom: .6em;
+}
+
+.score-panel ul,
+.score-panel div {
+    display: inline-block;
 }
 
 .score-panel .stars {
@@ -114,7 +117,8 @@ h1 {
     display: inline-block;
 }
 
-.score-panel .restart {
+.score-panel .reset {
     float: right;
     cursor: pointer;
 }
+
