@@ -72,6 +72,7 @@ h1 {
     transform: rotate(25deg);
     background: #02b3e4;
     cursor: default;
+    font-size: 2em;
 }
 
 .deck .card.show {
