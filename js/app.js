@@ -154,8 +154,11 @@ function addToMatchedCards() {
 
 function flipDown() {
     // If there's no match, flip the cards back over
-    openCards[0].classList.remove("no-match", "open");
-    openCards[1].classList.remove("no-match", "open");
+    console.log(openCards);
+    removeClasses(openCards, "no-match", "open");
+    
+    // openCards[0].classList.remove("no-match", "open");
+    // openCards[1].classList.remove("no-match", "open");
     // And remove them from the openCards array
     openCards.pop();
     openCards.pop();
@@ -281,3 +284,10 @@ deck.addEventListener("click", turn, false);
 // If the game is won or the player hits reset, then set up a new game
 document.getElementById("reset").addEventListener("click", setup, false);
 document.getElementById("play-again").addEventListener("click", setup, false);
+
+
+
+//const star = document.createElement("li");
+//star.innerHTML = '<i class="fa fa-star"></i>';
+//document.getElementById('stars').appendChild(star);
+
