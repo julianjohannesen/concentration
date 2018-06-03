@@ -3,16 +3,20 @@ const deck = document.getElementById("deck");
 const cards = Array.from(deck.querySelectorAll(".card"));
 const openCards = [];
 const matchedCards = [];
-let theCounter = 0;
+const moves = document.getElementById("moves");
+let moveCounter = 0;
 const clock = document.getElementById("clock");
 let seconds = 0;
 let minutes = 0;
 let hundredths = 0;
 let t;
+const reset = document.getElementById("reset");
+const playAgainModal = document.getElementById("play-again-modal");
+const playAgainBttn = document.getElementById("play-again");
 
 function setup(e) {
     if(e){e.preventDefault();}
-    document.getElementById("play-again-modal").classList.remove("show-modal");
+    playAgainModal.classList.remove("show-modal");
     shuffle(cards);
     const fragment = document.createDocumentFragment();
     for (const card of cards) {
@@ -63,15 +67,15 @@ function flipUp(e){e.target.classList.add("open");}
 function addToOpenCards(e){openCards.push(e.target);}
 
 function increaseCounter() {
-    theCounter++;
-    document.getElementById("moves").textContent = theCounter;
+    moveCounter++;
+    moves.textContent = moveCounter;
 }
 
 function matched() {
     const cardOneClasses = openCards[0].firstElementChild.classList;
     const cardTwoClasses = openCards[1].firstElementChild.classList;
     for (const theClass of cardOneClasses) {
-        if (/fa-.+/.test(theClass) && cardTwoClasses.contains(theClass)) {
+        if (/icon-.+/.test(theClass) && cardTwoClasses.contains(theClass)) {
             return true;
         }
     }
@@ -100,7 +104,7 @@ function flipDown() {
 function gameOver() {
     if (matchedCards.length === 16) {
         stopClock();
-        document.getElementById("play-again-modal").classList.add("show-modal");
+        playAgainModal.classList.add("show-modal");
     }
 }
 
@@ -114,7 +118,7 @@ function updateClock() {
             minutes++;
         }
     }
-    clock.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds) + ":" + (hundredths > 99 ? hundredths : "0" + hundredths);
+    clock.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds) + ":" + (hundredths > 9 ? hundredths : "0" + hundredths);
     startTimeout();
 }
 
@@ -129,35 +133,7 @@ function clearClock() {
     minutes = 0;
 }
 
-function removeClasses(theElements, ...theClasses) {
-    if (typeof theElements.item === "undefined") {
-        for (const theClass of theClasses) {
-            theElements.classList.remove(theClass);
-        }
-    } else {
-        for (const theElement of theElements) {
-            for (const theClass of theClasses) {
-                theElement.classList.remove(theClass);
-            }
-        }
-    }
-}
-
-function addClasses(theElements, ...theClasses) {
-    if (typeof theElements.item === "undefined") {
-        for (const theClass of theClasses) {
-            theElements.classList.add(theClass);
-        }
-    } else {
-        for (const theElement of theElements) {
-            for (const theClass of theClasses) {
-                theElement.classList.add(theClass);
-            }
-        }
-    }
-}
-
 setup();
 deck.addEventListener("click", turn, false);
-document.getElementById("reset").addEventListener("click", setup, false);
-document.getElementById("play-again").addEventListener("click", setup, false);
+reset.addEventListener("click", setup, false);
+playAgainBttn.addEventListener("click", setup, false);

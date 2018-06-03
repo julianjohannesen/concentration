@@ -10,7 +10,7 @@ const openCards = [];
 // The matched cards
 const matchedCards = [];
 // The move counter
-let theCounter = 0;
+let moveCounter = 0;
 // The clock
 const clock = document.getElementById("clock");
 // Clock variables
@@ -118,19 +118,19 @@ function addToOpenCards(e) {
 
 // Increase the move counter each time a card is flipped up
 function increaseCounter() {
-    theCounter++;
-    document.getElementById("moves").textContent = theCounter;
+    moveCounter++;
+    document.getElementById("moves").textContent = moveCounter;
 }
 
 /* If openCards contains two cards, then get the icon class of the first card and compare it to the icon class of the second card to see whether they match.
 NOTE - Add the 'match' 'open' and 'show' classesclass to the li element, not the i element. */
 function matched() {
-    // The list of classes on the i tag for both cards (should be fa and fa-whatever)
+    // The list of classes on the i tag for both cards (should be icon and icon-whatever)
     const cardOneClasses = openCards[0].firstElementChild.classList;
     const cardTwoClasses = openCards[1].firstElementChild.classList;
-    /* Then loop to check each class in the first card's class list to determine whether there's a class that begins with 'fa-' and if that same class is also contained in the second card's class list. Using the regular expression means that we don't have to depend on the position of the icon class in the list of classes. */
+    /* Then loop to check each class in the first card's class list to determine whether there's a class that begins with 'icon-' and if that same class is also contained in the second card's class list. Using the regular expression means that we don't have to depend on the position of the icon class in the list of classes. */
     for (const theClass of cardOneClasses) {
-        if (/fa-.+/.test(theClass) && cardTwoClasses.contains(theClass)) {
+        if (/icon-.+/.test(theClass) && cardTwoClasses.contains(theClass)) {
             return true;
         }
     }

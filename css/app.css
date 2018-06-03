@@ -1,5 +1,17 @@
+/* "Star Jedi" Font by Boba Fonts
+*  "Star Wars Icon Set" by Sherod Mirzaakhmedov 
+*  https://dribbble.com/shots/3907212-Starwars-Icon-Set 
+*/
+
+@font-face {
+    font-family: starjedi;
+    src: url(../img/Starjedi.ttf);
+}
+
 html {
     box-sizing: border-box;
+    background: url(../img/starfield2.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 
 *,
@@ -17,8 +29,9 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
+    font-size: 4.5vw;
+    color: #ffffff;
 }
 
 .container {
@@ -26,79 +39,116 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 3em;
+    margin: 4vw;
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
+    color: #ffce00;
+    font-family: 'starjedi', sans-serif;
     font-weight: 300;
-}
+    font-size: 9vw;
+    margin-top: 0;
+    padding-top: 0;
+    letter-spacing: .1em;
+    text-align: center;
+} 
 
 /*
  * Styles for the deck of cards
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    width: 75vw;
+    min-height: 75vw;
+    background: #ffce00;
     padding: 32px;
-    border-radius: 10px;
+    border-radius: 2vw;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 3em;
+    margin: 0 0 4vw;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 15vw;
+    width: 15vw;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
-    border-radius: 8px;
+    border-radius: 1vw;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    box-shadow: .5vw .3vw 1vw 0 rgba(46, 61, 73, 0.5);
     transition: background-color .2s ease-in-out;
-    transition: transform .2s ease;
+    /* transition: transform .2s ease; */
 }
 
 .deck .card.open {
-    transform: rotate(25deg);
-    background: #02b3e4;
+    /* transform: rotate(25deg); */
+    background: #007849;
     cursor: default;
-    font-size: 2em;
-}
-
-.deck .card.show {
-    font-size: 33px;
-}
+} 
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
-    font-size: 33px;
+    background: #0375b4;
+}
+
+.deck .card.open .icon,
+.deck .card.match .icon {
+    /* transform: rotate(35deg); */
+    width: 80%;
+    height: auto;
 }
 
 .deck .card.no-match {
     background: red;
     transition: background-color .2s ease-in-out;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+.icon {
+    width: 0;
 }
 
 /*
  * Styles for the Score Panel
  */
 
+.score-panel * {
+    display: inline-block;
+}
+
 .score-panel {
-    text-align: left;
+    text-align: center;
     width: 100%;
-    margin-top: 1em;
-    margin-bottom: .6em;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .score-panel ul,
@@ -119,7 +169,44 @@ h1 {
 }
 
 .score-panel .reset {
-    float: right;
     cursor: pointer;
+}
+
+/*
+* Styles for the modal
+*/
+
+.modal {
+    display: none !important;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    height: 50%;
+    width: 50%;
+    background-color: bisque;
+    text-align: center;
+}
+
+.modal h2, 
+.modal p, 
+.modal button {
+    margin: 4vh;
+}
+
+.modal h2 {
+    
+}
+
+.modal button {
+    font-size: 4vh;
+    border-radius: .1em;
+    border: .1em solid sandybrown;
+    padding: 1vh;
+    background-color: beige;
+    cursor: pointer;
+}
+
+.modal button:hover {
+
 }
 
