@@ -61,9 +61,8 @@ h1 {
     width: 75vw;
     min-height: 75vw;
     background: #ffce00;
-    padding: 32px;
+    padding: 3vw;
     border-radius: 2vw;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -190,7 +189,7 @@ h1 {
 .modal h2, 
 .modal p, 
 .modal button {
-    margin: 4vh;
+    margin: 4vw;
 }
 
 .modal h2 {
