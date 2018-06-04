@@ -40,6 +40,7 @@ body {
     align-items: center;
     flex-direction: column;
     margin: 4vw;
+    text-align: center;
 }
 
 h1 {
@@ -47,10 +48,11 @@ h1 {
     font-family: 'starjedi', sans-serif;
     font-weight: 300;
     font-size: 9vw;
-    margin-top: 0;
-    padding-top: 0;
+    margin: 0;
+    padding: 0;
     letter-spacing: .1em;
     text-align: center;
+    line-height: 1.2em;
 } 
 
 /*
@@ -58,21 +60,23 @@ h1 {
  */
 
 .deck {
-    width: 75vw;
-    min-height: 75vw;
     background: #ffce00;
     padding: 3vw;
     border-radius: 2vw;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 3vw 3vw;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
     justify-content: space-between;
+    align-content: space-between;
+    justify-items: center;
     align-items: center;
-    margin: 0 0 4vw;
-}
+    margin: 0;
+    margin-top: 3vw
+}`
 
 .deck .card {
-    height: 15vw;
-    width: 15vw;
+    height: 30vw;
+    width: 30vw;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -82,7 +86,7 @@ h1 {
     justify-content: center;
     align-items: center;
     box-shadow: .5vw .3vw 1vw 0 rgba(46, 61, 73, 0.5);
-    transition: background-color .2s ease-in-out;
+    /* transition: background-color .2s ease-in-out; */
     /* transition: transform .2s ease; */
 }
 
@@ -93,8 +97,8 @@ h1 {
 } 
 
 .deck .card.match {
-    cursor: default;
     background: #0375b4;
+    cursor: default;
 }
 
 .deck .card.open .icon,
@@ -144,27 +148,31 @@ h1 {
 }
 
 .score-panel {
-    text-align: center;
-    width: 100%;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+    /* text-align: center; */
+    /* width: 100%; */
+    margin: 1vw auto;
+    /* margin-bottom: 1vw; */
 }
 
-.score-panel ul,
+/* .score-panel ul,
 .score-panel div {
     display: inline-block;
-}
+} */
 
 .score-panel .stars {
-    margin: 0;
+    /* margin: 0;
     padding: 0;
-    display: inline-block;
-    margin: 0 5px 0 0;
+    display: inline-block; */
+    margin-right: 1em;
 }
 
 .score-panel .stars li {
     list-style: none;
-    display: inline-block;
+    /* display: inline-block; */
+}
+
+.clock {
+    font-family: monospace;
 }
 
 .score-panel .reset {
@@ -197,10 +205,10 @@ h1 {
 }
 
 .modal button {
-    font-size: 4vh;
+    font-size: 4vw;
     border-radius: .1em;
     border: .1em solid sandybrown;
-    padding: 1vh;
+    padding: 1vw;
     background-color: beige;
     cursor: pointer;
 }
@@ -208,4 +216,20 @@ h1 {
 .modal button:hover {
 
 }
+
+/*
+* MEDIA QUERIES
+*/
+
+@media screen and (orientation: portrait) {
+    .whatever {
+      width: 100%;
+    }
+  }
+
+@media screen and (orientation: landscape) {
+    .whatever {
+      width: 100%;
+    }
+  }
 
