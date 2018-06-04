@@ -34,6 +34,7 @@ function setup(e) {
     }
     deck.innerHTML = "";
     deck.appendChild(fragment);
+    moves.textContent = 0;
     clearClock();
     startTimeout();
 }
@@ -93,6 +94,7 @@ function matched() {
 function addMatch() {
     openCards[0].classList.add("match");
     openCards[1].classList.add("match");
+    addToMatchedCards();
 }
 
 function addToMatchedCards() {
@@ -100,7 +102,6 @@ function addToMatchedCards() {
     openCards.pop();
     openCards.pop();
     gameOver();
-
 }
 
 function flipDown() {
@@ -112,6 +113,7 @@ function flipDown() {
 
 function gameOver() {
     if (matchedCards.length === 16) {
+        matchedCards.splice(0,16);
         stopClock();
         playAgainModal.classList.add("show-modal");
     }

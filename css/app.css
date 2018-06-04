@@ -30,7 +30,6 @@ body {
 
 body {
     font-family: 'Coda', cursive;
-    font-size: 4.5vw;
     color: #ffffff;
 }
 
@@ -39,7 +38,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 4vw;
+    margin: 4vmin;
     text-align: center;
 }
 
@@ -47,7 +46,7 @@ h1 {
     color: #ffce00;
     font-family: 'starjedi', sans-serif;
     font-weight: 300;
-    font-size: 9vw;
+    font-size: 9vmin;
     margin: 0;
     padding: 0;
     letter-spacing: .1em;
@@ -56,19 +55,16 @@ h1 {
 } 
 
 .play {
-    border: 1vw solid #000000;
-    border-radius: 2vw;
+    border: 1vmin solid #000000;
+    border-radius: 2vmin;
     background-color: #ffce00;
-    padding: 1vw 4vw;
-    font-size: 3vw;
+    padding: 1vmin 4vmin;
+    font-size: 3vmin;
     font-weight: bold;
     line-height: 2;
     vertical-align: bottom;
+    cursor: pointer;
 } 
-
-/* icon-play::before {
-    content: "\f04b";
-} */
 
 /*
  * Styles for the deck of cards
@@ -81,79 +77,66 @@ h1 {
 .deck {
 
     background: #ffce00;
-    padding: 3vw;
-    border-radius: 2vw;
+    padding: 3vmin;
+    border-radius: 2vmin;
     display: grid;
-    grid-gap: 3vw 3vw;
+    grid-gap: 3vmin 3vmin;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+    /* Do I need all this stuff? */
     justify-content: space-between;
     align-content: space-between;
     justify-items: center;
     align-items: center;
     margin: 0;
-    margin-top: 3vw;
+    margin-top: 3vmin;
+    /* for flip effect */
+    perspective: 1000px;
 }
 
 .deck .card {
-    height: 15vw;
-    width: 15vw;
+    height: 15vmin;
+    width: 15vmin;
     background: #2e3d49;
-    font-size: 0;
     color: #ffffff;
-    border-radius: 1vw;
+    border-radius: 1vmin;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: .5vw .3vw 1vw 0 rgba(46, 61, 73, 0.5);
-    /* transition: background-color .2s ease-in-out; */
-    /* transition: transform .2s ease; */
+    box-shadow: .5vmin .3vmin 1vmin 0 rgba(46, 61, 73, 0.5);
+    /* For flip effect */
+    transition: 0.6s;
+    transform-style: preserve-3d;
 }
 
 .deck .card.open {
-    /* transform: rotate(25deg); */
+    transform: rotateY(180deg);
     background: #007849;
-    cursor: default;
+    cursor: pointer;
 } 
+
+.deck .card.open .icon {
+    transform: rotateY(180deg);
+    width: 80%;
+    height: auto;
+}
 
 .deck .card.match {
     background: #0375b4;
     cursor: default;
 }
 
-.deck .card.open .icon,
-.deck .card.match .icon {
-    /* transform: rotate(35deg); */
-    width: 80%;
-    height: auto;
-}
-
 .deck .card.no-match {
     background: red;
-    transition: background-color .2s ease-in-out;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-    perspective: 1000px;
 }
 
-@keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
-    }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
-    }
-  }
+/* .flash {
+    animation: flash .5s infinite alternate;
+}
+
+@keyframes flash {
+    to: {color: red;}
+} */
 
 .icon {
     width: 0;
@@ -163,36 +146,23 @@ h1 {
  * Styles for the Score Panel
  */
 
-.score-panel * {
-    display: inline-block;
-}
-
 .score-panel {
-    /* text-align: center; */
-    /* width: 100%; */
-    margin: 1vw auto;
-    /* margin-bottom: 1vw; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    font-size: 2vmin;
 }
-
-/* .score-panel ul,
-.score-panel div {
-    display: inline-block;
-} */
 
 .score-panel .stars {
-    /* margin: 0;
-    padding: 0;
-    display: inline-block; */
-    margin-right: 1em;
+    list-style: none;
 }
 
 .score-panel .stars li {
-    list-style: none;
-    /* display: inline-block; */
+    display: inline-block;
 }
 
-.clock {
+.score-panel .clock {
     font-family: monospace;
+    padding-top: 0.5vmin;
 }
 
 .score-panel .reset {
@@ -217,7 +187,7 @@ h1 {
 .modal h2, 
 .modal p, 
 .modal button {
-    margin: 4vw;
+    margin: 4vmin;
 }
 
 .modal h2 {
@@ -225,10 +195,10 @@ h1 {
 }
 
 .modal button {
-    font-size: 4vw;
+    font-size: 4vmin;
     border-radius: .1em;
     border: .1em solid sandybrown;
-    padding: 1vw;
+    padding: 1vmin;
     background-color: beige;
     cursor: pointer;
 }
@@ -240,12 +210,6 @@ h1 {
 /*
 * MEDIA QUERIES
 */
-
-@media screen and (orientation: portrait) {
-    .whatever {
-      width: 100%;
-    }
-  }
 
 @media screen and (orientation: landscape) {
     .whatever {
