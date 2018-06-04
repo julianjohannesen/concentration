@@ -71,8 +71,8 @@ h1 {
     justify-items: center;
     align-items: center;
     margin: 0;
-    margin-top: 3vw
-}`
+    margin-top: 3vw;
+}
 
 .deck .card {
     height: 15vw;
