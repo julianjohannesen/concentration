@@ -3,6 +3,9 @@ const deck = document.getElementById("deck");
 const cards = Array.from(deck.querySelectorAll(".card"));
 const openCards = [];
 const matchedCards = [];
+const header = document.querySelector(".header");
+const innerContainer = document.querySelector(".inner-container");
+const play = document.querySelector(".play");
 const moves = document.getElementById("moves");
 let moveCounter = 0;
 const clock = document.getElementById("clock");
@@ -15,7 +18,13 @@ const playAgainModal = document.getElementById("play-again-modal");
 const playAgainBttn = document.getElementById("play-again");
 
 function setup(e) {
-    if(e){e.preventDefault();}
+    if(e){
+        e.preventDefault();
+        if(e.target.id == "play"){
+            header.style.display = "none";
+            innerContainer.style.display = "block";
+        }
+    }
     playAgainModal.classList.remove("show-modal");
     shuffle(cards);
     const fragment = document.createDocumentFragment();
@@ -136,4 +145,5 @@ function clearClock() {
 setup();
 deck.addEventListener("click", turn, false);
 reset.addEventListener("click", setup, false);
+play.addEventListener("click", setup, false);
 playAgainBttn.addEventListener("click", setup, false);

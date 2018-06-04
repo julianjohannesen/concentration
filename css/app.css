@@ -55,11 +55,31 @@ h1 {
     line-height: 1.2em;
 } 
 
+.play {
+    border: 1vw solid #000000;
+    border-radius: 2vw;
+    background-color: #ffce00;
+    padding: 1vw 4vw;
+    font-size: 3vw;
+    font-weight: bold;
+    line-height: 2;
+    vertical-align: bottom;
+} 
+
+/* icon-play::before {
+    content: "\f04b";
+} */
+
 /*
  * Styles for the deck of cards
  */
 
+ .inner-container {
+     display: none;
+ }
+
 .deck {
+
     background: #ffce00;
     padding: 3vw;
     border-radius: 2vw;
