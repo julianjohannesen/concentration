@@ -29,17 +29,13 @@ body {
 }
 
 body {
-    font-family: 'Coda', cursive;
+    font-family: 'Coda', sans-serif;
     color: #ffffff;
 }
 
 .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     margin: 4vmin;
-    text-align: center;
 }
 
 h1 {
@@ -53,6 +49,10 @@ h1 {
     text-align: center;
     line-height: 1.2em;
 } 
+
+.instructions {
+    font-size: 5vmin;
+}
 
 .play {
     border: 1vmin solid #000000;
@@ -72,6 +72,7 @@ h1 {
 
  .inner-container {
      display: none;
+     margin: 0 auto;
  }
 
 .deck {
@@ -82,15 +83,12 @@ h1 {
     display: grid;
     grid-gap: 3vmin 3vmin;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
-    /* Do I need all this stuff? */
-    justify-content: space-between;
-    align-content: space-between;
-    justify-items: center;
-    align-items: center;
     margin: 0;
     margin-top: 3vmin;
     /* for flip effect */
     perspective: 1000px;
+    width: 75vmin;
+    height: 75vmin;
 }
 
 .deck .card {
@@ -147,22 +145,34 @@ h1 {
  */
 
 .score-panel {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    font-size: 2vmin;
+    font-size: 3vmin;
+}
+
+.score-panel > * {
+    display: inline-block;
+    margin: 0;
+    padding: 0 1.5em 0 0;
 }
 
 .score-panel .stars {
     list-style: none;
+    margin-left: 0;
 }
 
 .score-panel .stars li {
     display: inline-block;
+    padding-right: 0;
+}
+
+.score-panel .moves {
+}
+
+.score-panel .elapsed {
+    padding-right: .5em;
 }
 
 .score-panel .clock {
     font-family: monospace;
-    padding-top: 0.5vmin;
 }
 
 .score-panel .reset {
