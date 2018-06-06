@@ -154,6 +154,9 @@ h1 {
 
 .score-panel {
     font-size: 3vmin;
+    background-color: rgba(46, 61, 73, 0.7);
+    padding: 1vmin;
+    border-radius: 1vmin;
 }
 
 .score-panel > * {

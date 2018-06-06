@@ -88,7 +88,7 @@ function turn(e) {
                 } else {
                     openCards[0].classList.add("no-match");
                     openCards[1].classList.add("no-match");
-                    const flipDownTimer = setTimeout(flipDown, 1600);
+                    const flipDownTimer = setTimeout(flipDown, 1200);
                 }
             }
         }

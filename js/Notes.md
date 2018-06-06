@@ -29,4 +29,12 @@ Notes
 - starHandlerTimer
 - modalTimer
 
-I haven't cleared all of my timers! There's still the flipdown timer
+#PROBLEMS:#
+- gameOver calls stopClock and that's a problem, because clicking reset doesn't run gameOver
+-  Add contrast background to score panel
+- Should stars be going up or down?
+- re-read rubric
+- add flash animation to red no-match
+- The clock and star timers don't exactly match up. That's fixable.
+- I haven't cleared all of my timers! There's still the flipdown timer
+- Add a design to the back of the cards
