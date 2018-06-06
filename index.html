@@ -175,46 +175,29 @@
 
         <header>
             <h1>Star Wars Concentration!</h1>
-            <p class="instructions">Click on a card to reveal it. Click on a second card to find a match.
-                <button id="play" class="play">
-                    <i class="fa fa-play"></i> PLAY</button>
-            </p>
+            <p class="instructions">Click on a card to reveal it. Click on a<br>second card to find a match.</p>
+            <button id="play" class="play">
+                <i class="fa fa-play"></i> PLAY
+            </button>
         </header>
 
         <div class="inner-container">
             <section class="score-panel">
-                <ul id="stars" class="stars">
-                    <li>
-                        <i class="fa fa-star"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star"></i>
-                    </li>
-                    <li>
-                        <i class="fa fa-star"></i>
-                    </li>
-                </ul>
+                <!-- Sorry about the formatting. Needed to eliminate some text nodes-->
+                <ul id="stars" class="stars"><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li></ul>
 
                 <p class="moves"><span id="moves">0</span> Moves</p>
-                <p class="elapsed">Elapsed Time: </p>
+                <p class="elapsed">Clock: </p>
                 <p id="clock" class="clock">00:00:00</p>
                 <p id="reset" class="reset"><i class="fa fa-repeat"></i> Reset</p>
 
-                <div id="play-again-modal" class="modal">
+                <div id="modal" class="modal">
                     <h2>Congratulations! You completed the game.</h2>
-                    <p>Your star rating is:
-                        <ul class="stars"></ul>
+                    <p id="modalRating">Your star rating is:    
                     </p>
-                    <p>Your time is:
-                        <span class="timer"></span>
+                    <p id="modalTime">Your time is:
                     </p>
-                    <button id="play-again">Play Again!</button>
+                    <button id="play-again" class="play">Play Again!</button>
                 </div>
             </section>
 
