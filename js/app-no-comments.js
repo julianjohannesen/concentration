@@ -117,7 +117,6 @@ function matched() {
 function addMatch() {
     openCards[0].classList.add("match");
     openCards[1].classList.add("match");
-    
 }
 
 function addToMatchedCards() {
@@ -171,7 +170,7 @@ function clearClock() {
 }
 
 function starRating () {
-    starHandlerTimer = setInterval(starHandler, 2000);
+    starHandlerTimer = setInterval(starHandler, 20000);
 }
 
 function starHandler() { 

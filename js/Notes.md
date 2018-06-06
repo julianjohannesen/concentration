@@ -13,8 +13,7 @@ Notes
 - stopClock
 - clearClock
 - starRating
-- halfHandler
-- wholeHandler
+- starHandler
 - modalSetup
 
 
@@ -27,6 +26,7 @@ Notes
 #Timers#
 - flipDownTimer
 - clockTimer
-- halfHandlerTimer
-- wholeHandlerTimer
+- starHandlerTimer
 - modalTimer
+
+I haven't cleared all of my timers! There's still the flipdown timer
