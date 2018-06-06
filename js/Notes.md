@@ -31,7 +31,7 @@ Notes
 
 #PROBLEMS:#
 - gameOver calls stopClock and that's a problem, because clicking reset doesn't run gameOver
--  Add contrast background to score panel
+- DONE: Add contrast background to score panel
 - Should stars be going up or down?
 - re-read rubric
 - add flash animation to red no-match

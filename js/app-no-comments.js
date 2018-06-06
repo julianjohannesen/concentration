@@ -51,6 +51,7 @@ function setup(e) {
     moveCounter = 0
     moves.textContent = moveCounter;
     /* Show hidden stars */
+    i = 10;
     starsLis.forEach( theLi => theLi.firstElementChild.classList.remove("hide"));
     /* Clear all timers */
     stopClock();
