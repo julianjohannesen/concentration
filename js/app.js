@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 /*
-* VARIABLES 
+* VARIABLES
 */
 /* DOM elements */
 const header = document.querySelector("header");
@@ -54,7 +54,7 @@ function setup(e) {
     /* Clear the matched cards array */
     matchedCards.splice(0,16);
     /* Clear the move counter and moves */
-    moveCounter = 0
+    moveCounter = 0;
     moves.textContent = moveCounter;
     /* Reset star counter and show hidden stars */
     i = 10;
@@ -210,7 +210,7 @@ function starRating () {
 }
 
 /* The star decrementing function */
-function starHandler() { 
+function starHandler() {
     if (i % 2 === 0) {
         /* If the counter is even, then change the star to a half star  by swappin the fa class */
         let theStar = starsLis[(i/2) - 1].firstElementChild;
