@@ -1,0 +1,30 @@
+{
+  "name": "concentration",
+  "version": "1.0.0",
+  "description": "A Star Wars themed card matching game ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianjohannesen/fend-project-memory-game.git"
+  },
+  "keywords": [
+    "games",
+    "js",
+    "projects",
+    "Udacity",
+    "ND"
+  ],
+  "author": "Julian <Julian.Johannesen@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julianjohannesen/fend-project-memory-game/issues"
+  },
+  "homepage": "https://github.com/julianjohannesen/fend-project-memory-game#readme",
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1"
+  }
+}
