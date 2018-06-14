@@ -40,3 +40,4 @@ Notes
 - Add a design to the back of the cards
 - Document the code
 - Don't immediately show the match on matched cards, add some sort of cool effect
+- Add a modal for when a player times out - that is, the stars are reduced to zero

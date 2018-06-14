@@ -25,6 +25,7 @@
   "homepage": "https://github.com/julianjohannesen/fend-project-memory-game#readme",
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.9.1"
+    "eslint-plugin-react": "^7.9.1",
+    "lodash": "^4.17.10"
   }
 }
