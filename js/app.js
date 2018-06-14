@@ -33,11 +33,11 @@
       e.preventDefault();
       /* If the user clicked play on the splashscreen, hide the splash and show the game board */
       if (e.target.id === "play") {
-        header.style.display = "none";
-        innerContainer.style.display = "block";
+        header.classList.toggle("hide");
+        innerContainer.classList.toggle("hide");
       }
     }
-    /* If the clicked play on the modal, hide the modal */
+    /* If the player clicked play on the modal, hide the modal */
     playAgainModal.classList.remove("show-modal");
     /* Shuffle cards */
     shuffle(cards);
@@ -60,8 +60,8 @@
     moveCounter = 0;
     moves.textContent = moveCounter;
     /* Reset star counter and show hidden stars */
-    i = 10;
-    starsLis.forEach(theLi => theLi.firstElementChild.classList.remove("hide"));
+    // starsLis.childNodes.forEach( cNode => cNode.classList.remove("far"));
+    // starsLis.childNodes.forEach( cNode => cNode.classList.add("fas"));
     /* Clear all timers */
     stopClock();
     clearClock();
@@ -205,7 +205,7 @@
   }
   
   function updateStarRating() {
-    if (j % 200 === 0) {
+    if (j % 2000 === 0) {
       if (i % 2 === 0) {
         let theStar = starsLis[(i / 2) - 1].firstElementChild;
         theStar.classList.remove("fa-star");
@@ -224,10 +224,10 @@
     clearInterval(clockInterval);
   }
 
-  /* Reset the clock and reset clock counters */
+  /* Reset the clock, reset clock counters, and reset stars */
   function clearClock() {
     clock.textContent = "00:00:00";
-    hundredths = 0; seconds = 0; minutes = 0; i = 0; j = 0;
+    hundredths = 0; seconds = 0; minutes = 0; i = 10; j = 0;
   }
 
   /* Show the modal with the star rating and time */
