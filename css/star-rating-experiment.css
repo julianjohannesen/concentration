@@ -1,0 +1,33 @@
+/* This is part of an experiment in different star rating systems. */
+
+div, p, i, svg {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    color: white;
+}
+
+/* 
+* By Paul Hachmang 
+* https://github.com/paales
+*/
+.rating-box {
+    position:relative;
+    /* vertical-align: middle; */
+    /* font-size: 3em; */
+    /* display:inline-block; */
+    /* color: white; */
+}
+  
+.rating {
+    position: absolute;
+    /* left:0;
+    top:0; */
+    white-space:nowrap;
+    overflow:hidden;
+    /* color: white; */
+}
+
+.rating-top {
+    z-index: 2;
+}

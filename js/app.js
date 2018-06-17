@@ -22,13 +22,9 @@
   const openCards = [];
   const matchedCards = [];
   /* Counters */
-  let moveCounter = 0,
-    seconds = 0,
-    minutes = 0,
-    hundredths = 0,
-    i = 10;
+  let moveCounter = 0, seconds = 0, minutes = 0, hundredths = 0, i = 10, j = 0;
   /* Timers */
-  let flipDownTimer, clockTimer, modalTimer, starHandlerTimer;
+  let flipDownTimer, clockInterval, modalTimer;
 
   /* Setup play, initialize or re-initialize counters, timers, etc. */
   function setup(e) {
@@ -37,11 +33,11 @@
       e.preventDefault();
       /* If the user clicked play on the splashscreen, hide the splash and show the game board */
       if (e.target.id === "play") {
-        header.style.display = "none";
-        innerContainer.style.display = "block";
+        header.classList.toggle("hide");
+        innerContainer.classList.toggle("hide");
       }
     }
-    /* If the clicked play on the modal, hide the modal */
+    /* If the player clicked play on the modal, hide the modal */
     playAgainModal.classList.remove("show-modal");
     /* Shuffle cards */
     shuffle(cards);
@@ -64,8 +60,8 @@
     moveCounter = 0;
     moves.textContent = moveCounter;
     /* Reset star counter and show hidden stars */
-    i = 10;
-    starsLis.forEach(theLi => theLi.firstElementChild.classList.remove("hide"));
+    // starsLis.childNodes.forEach( cNode => cNode.classList.remove("far"));
+    // starsLis.childNodes.forEach( cNode => cNode.classList.add("fas"));
     /* Clear all timers */
     stopClock();
     clearClock();
@@ -97,15 +93,10 @@
   function turn(e) {
     // clearTimeout(flipDownTimer);
     /* If the user clicks on a card that isn't already open or a matched card, then... */
-    if (
-      e.target.nodeName.toLowerCase() === "li" &&
-            !openCards.includes(e.target) &&
-            !matchedCards.includes(e.target)
-    ) {
+    if (e.target.nodeName.toLowerCase() === "li" && !openCards.includes(e.target) && !matchedCards.includes(e.target)) {
       /* If this is a new game, restart the clock and star ratings */
       if (moveCounter === 0) {
-        startTimeout();
-        updateStarRating();
+        clockInterval = setInterval(clockAndStarRatingHandler, 10);
       }
       /* If there are 0 or 1 cards showing ... */
       if (openCards.length === 0 || openCards.length === 1) {
@@ -193,8 +184,14 @@
   }
 
   /* Update the clock */
+
+  function clockAndStarRatingHandler() {
+    j++;
+    updateClock();
+    updateStarRating();
+  }
+  
   function updateClock() {
-    /* This section defines hundredths, seconds and minutes */
     hundredths++;
     if (hundredths > 99) {
       hundredths = 0;
@@ -204,57 +201,33 @@
         minutes++;
       }
     }
-    /* This section inserts the count. The long ternary expression is determining whether to add a leading 0 to each part of the 00:00:00 clock */
-    clock.textContent =
-            (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
-            ":" +
-            (seconds > 9 ? seconds : "0" + seconds) +
-            ":" +
-            (hundredths > 9 ? hundredths : "0" + hundredths);
-    /* Now start counting */
-    startTimeout();
+    clock.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds) + ":" + (hundredths > 9 ? hundredths : "0" + hundredths);
   }
-
-  /* The clock timer */
-  function startTimeout() {
-    clockTimer = setTimeout(updateClock, 10);
+  
+  function updateStarRating() {
+    if (j % 2000 === 0) {
+      if (i % 2 === 0) {
+        let theStar = starsLis[(i / 2) - 1].firstElementChild;
+        theStar.classList.remove("fa-star");
+        theStar.classList.add("fa-star-half");
+      } else {
+        let theStar = starsLis[((i + 1) / 2) - 1].firstElementChild;
+        theStar.classList.remove("fas", "fa-star-half");
+        theStar.classList.add("far", "fa-star");
+      }
+      i--;
+    }
   }
 
   /* Stop the clock and the star rating timer */
   function stopClock() {
-    clearTimeout(clockTimer);
-    clearInterval(starHandlerTimer);
+    clearInterval(clockInterval);
   }
 
-  /* Reset the clock and reset clock counters */
+  /* Reset the clock, reset clock counters, and reset stars */
   function clearClock() {
     clock.textContent = "00:00:00";
-    hundredths = 0;
-    seconds = 0;
-    minutes = 0;
-  }
-
-  /* Start the star rating timer */
-  function updateStarRating() {
-    /* We'll decrement the stars by halfs every 20 seconds */
-    starHandlerTimer = setInterval(starHandler, 20000);
-  }
-
-  /* The star decrementing function */
-  function starHandler() {
-    if (i % 2 === 0) {
-      /* If the counter is even, then change the star to a half star  by swappin the fa class */
-      let theStar = starsLis[i / 2 - 1].firstElementChild;
-      theStar.classList.remove("fa-star");
-      theStar.classList.add("fa-star-half");
-    } else {
-      /* If the counter is odd, then change the half star back to a star and hide it */
-      let theStar = starsLis[(i + 1) / 2 - 1].firstElementChild;
-      theStar.classList.remove("fa-star-half");
-      theStar.classList.add("fa-star", "hide");
-    }
-    /* Decrement the counter. The counter is declared up at the top under VARIABLES */
-    i--;
+    hundredths = 0; seconds = 0; minutes = 0; i = 10; j = 0;
   }
 
   /* Show the modal with the star rating and time */
